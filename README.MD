@@ -33,3 +33,41 @@ public class Solution {
     }
 }
 ```
+
+```java
+import java.util.*;
+
+public class TopKFrequent {
+
+    public static List<Integer> topKFrequent(int[] nums, int k) {
+
+        // 1. Compter les fréquences
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int num : nums) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+        }
+
+        // 2. Transformer en liste
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(freqMap.entrySet());
+
+        // 3. Trier par fréquence décroissante
+        list.sort((a, b) -> b.getValue() - a.getValue());
+
+        // 4. Récupérer les k premiers
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            result.add(list.get(i).getKey());
+        }
+
+        return result;
+    }
+
+    // Test rapide
+    public static void main(String[] args) {
+        int[] nums = {1,1,1,2,2,3};
+        int k = 2;
+
+        System.out.println(topKFrequent(nums, k)); // [1, 2]
+    }
+}
+```
