@@ -51,4 +51,8 @@ public class ProductController {
         System.out.println("aa");
         return service.getByCategory(categoryId);
     }
+    @GetMapping("search/{lettres}")
+    public List<ProductDTO> getLetter(@PathVariable String lettres) {
+        return service.search(lettres);
+    }
 }

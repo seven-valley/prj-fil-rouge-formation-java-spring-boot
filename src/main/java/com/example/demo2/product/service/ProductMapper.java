@@ -1,6 +1,6 @@
 package com.example.demo2.product.service;
 
-
+import java.util.stream.Collectors;
 import com.example.demo2.product.dto.*;
 import com.example.demo2.product.entity.*;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class ProductMapper {
         catDTO.setName(product.getCategory().getName());
 
         dto.setCategory(catDTO);
-
+        dto.setTags(product.getTags().stream().map(TagMapper::toDTO).collect(Collectors.toList()));
         return dto;
     }
 
@@ -33,9 +33,9 @@ public class ProductMapper {
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
         product.setQuantity(dto.getQuantity());
+        
         Category category = new Category();
         category.setId(dto.getCategory().getId());
-
         product.setCategory(category);
 
         return product;

@@ -77,4 +77,11 @@ public class ProductService {
                 .map(ProductMapper::toDTO)
                 .toList();
     }
+    public List<ProductDTO> search(String keyword) {
+        return repository.findByNameContaining(keyword)
+                .stream()
+                .map(ProductMapper::toDTO)
+                .toList();
+   
+ }
 }
